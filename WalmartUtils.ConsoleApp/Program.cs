@@ -59,7 +59,7 @@ namespace WalmartUtils.ConsoleApp
                 else if (prop.Name.ToLower() == "item")
                 {
                     var attrs = prop.GetCustomAttributes<System.Xml.Serialization.XmlElementAttribute>().Select(a => a.Type);
-                    foreach (var attr in attrs)
+                    foreach (var attr in attrs.Where(x => x != null))
                     {
                         foreach (var p in attr.GetProperties(BindingFlags.Public | BindingFlags.Instance))
                         {
