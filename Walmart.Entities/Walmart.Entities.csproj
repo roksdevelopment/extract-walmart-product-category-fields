@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7A4BDF3-67E5-4C5A-9C11-6623257C2949}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Walmart.Entities</RootNamespace>
+    <AssemblyName>Walmart.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="mp\activeIngredient.cs" />
+    <Compile Include="mp\additionalAsset.cs" />
+    <Compile Include="mp\additionalAssetAttribute.cs" />
+    <Compile Include="mp\additionalProductAttribute.cs" />
+    <Compile Include="mp\AlcoholicBeverages.cs" />
+    <Compile Include="mp\AngleUnit.cs" />
+    <Compile Include="mp\AngleUnitOfMeasure.cs" />
+    <Compile Include="mp\Animal.cs" />
+    <Compile Include="mp\AnimalAccessories.cs" />
+    <Compile Include="mp\AnimalFood.cs" />
+    <Compile Include="mp\AnimalHealthAndGrooming.cs" />
+    <Compile Include="mp\AreaUnit.cs" />
+    <Compile Include="mp\AreaUnitOfMeasure.cs" />
+    <Compile Include="mp\ArtAndCraft.cs" />
+    <Compile Include="mp\ArtAndCraftAgeRange.cs" />
+    <Compile Include="mp\ArtAndCraftGender.cs" />
+    <Compile Include="mp\Baby.cs" />
+    <Compile Include="mp\BabyAgeRange.cs" />
+    <Compile Include="mp\BabyClothing.cs" />
+    <Compile Include="mp\BabyClothingApparelCategory.cs" />
+    <Compile Include="mp\BabyClothingGender.cs" />
+    <Compile Include="mp\BabyFood.cs" />
+    <Compile Include="mp\BabyFootwear.cs" />
+    <Compile Include="mp\BabyFootwearGender.cs" />
+    <Compile Include="mp\BabyFurniture.cs" />
+    <Compile Include="mp\BabyGender.cs" />
+    <Compile Include="mp\BabyToys.cs" />
+    <Compile Include="mp\BabyToysAgeRange.cs" />
+    <Compile Include="mp\batteryTypeAndQuantityValue.cs" />
+    <Compile Include="mp\batteryTypeAndQuantityValueBatteryTechnologyType.cs" />
+    <Compile Include="mp\Bedding.cs" />
+    <Compile Include="mp\Beds.cs" />
+    <Compile Include="mp\BooksAndMagazines.cs" />
+    <Compile Include="mp\BooksAndMagazinesFictionNonfiction.cs" />
+    <Compile Include="mp\BooksAndMagazinesGender.cs" />
+    <Compile Include="mp\Bras.cs" />
+    <Compile Include="mp\BraSize.cs" />
+    <Compile Include="mp\BrightnessUnit.cs" />
+    <Compile Include="mp\BrightnessUnitOfMeasure.cs" />
+    <Compile Include="mp\BuildingSupply.cs" />
+    <Compile Include="mp\BuildingSupplyAcRating.cs" />
+    <Compile Include="mp\BuildingSupplyCeeTier.cs" />
+    <Compile Include="mp\CamerasAndLenses.cs" />
+    <Compile Include="mp\CarriersAndAccessories.cs" />
+    <Compile Include="mp\CarriersAndAccessoriesGender.cs" />
+    <Compile Include="mp\CasesAndBags.cs" />
+    <Compile Include="mp\CellPhones.cs" />
+    <Compile Include="mp\CeremonialClothingAndAccessories.cs" />
+    <Compile Include="mp\CeremonialClothingAndAccessoriesApparelCategory.cs" />
+    <Compile Include="mp\CeremonialClothingAndAccessoriesClothingSizeType.cs" />
+    <Compile Include="mp\CeremonialClothingAndAccessoriesGender.cs" />
+    <Compile Include="mp\certificationsAndClaim.cs" />
+    <Compile Include="mp\ChildCarSeats.cs" />
+    <Compile Include="mp\CleaningAndChemical.cs" />
+    <Compile Include="mp\Clothing.cs" />
+    <Compile Include="mp\ClothingAccessories.cs" />
+    <Compile Include="mp\ClothingApparelCategory.cs" />
+    <Compile Include="mp\ClothingClothingSizeType.cs" />
+    <Compile Include="mp\ClothingGender.cs" />
+    <Compile Include="mp\ComputerComponents.cs" />
+    <Compile Include="mp\ComputerComponentsInternalExternal.cs" />
+    <Compile Include="mp\Computers.cs" />
+    <Compile Include="mp\Costumes.cs" />
+    <Compile Include="mp\CostumesClothingSizeType.cs" />
+    <Compile Include="mp\CostumesGender.cs" />
+    <Compile Include="mp\CurrencyCode.cs" />
+    <Compile Include="mp\CurrencyUnit.cs" />
+    <Compile Include="mp\CurrencyUnitOfMeasure.cs" />
+    <Compile Include="mp\Cycling.cs" />
+    <Compile Include="mp\DecorationsAndFavors.cs" />
+    <Compile Include="mp\DecorationsAndFavorsGender.cs" />
+    <Compile Include="mp\DigitalCapacityUnit.cs" />
+    <Compile Include="mp\DigitalCapacityUnitOfMeasure.cs" />
+    <Compile Include="mp\Dresses.cs" />
+    <Compile Include="mp\DressShirts.cs" />
+    <Compile Include="mp\DressShirtSize.cs" />
+    <Compile Include="mp\Electrical.cs" />
+    <Compile Include="mp\ElectricalCeeTier.cs" />
+    <Compile Include="mp\ElectricalMeasurementUnit.cs" />
+    <Compile Include="mp\ElectricalMeasurementUnitOfMeasure.cs" />
+    <Compile Include="mp\Electronics.cs" />
+    <Compile Include="mp\ElectronicsAccessories.cs" />
+    <Compile Include="mp\ElectronicsCables.cs" />
+    <Compile Include="mp\MPItemFeedHeader.cs" />
+    <Compile Include="mp\fabricContentValue.cs" />
+    <Compile Include="mp\FoodAndBeverage.cs" />
+    <Compile Include="mp\Footwear.cs" />
+    <Compile Include="mp\FootwearGender.cs" />
+    <Compile Include="mp\FrequencyUnit.cs" />
+    <Compile Include="mp\FrequencyUnitOfMeasure.cs" />
+    <Compile Include="mp\FuelEconomyUnit.cs" />
+    <Compile Include="mp\FuelEconomyUnitOfMeasure.cs" />
+    <Compile Include="mp\Funeral.cs" />
+    <Compile Include="mp\Furniture.cs" />
+    <Compile Include="mp\FurnitureGender.cs" />
+    <Compile Include="mp\Games.cs" />
+    <Compile Include="mp\GardenAndPatio.cs" />
+    <Compile Include="mp\GrillsAndOutdoorCooking.cs" />
+    <Compile Include="mp\Hardware.cs" />
+    <Compile Include="mp\HealthAndBeauty.cs" />
+    <Compile Include="mp\HealthAndBeautyElectronics.cs" />
+    <Compile Include="mp\HealthAndBeautyGender.cs" />
+    <Compile Include="mp\Home.cs" />
+    <Compile Include="mp\HomeDecor.cs" />
+    <Compile Include="mp\HomeGender.cs" />
+    <Compile Include="mp\inputsAndOutput.cs" />
+    <Compile Include="mp\InstrumentAccessories.cs" />
+    <Compile Include="mp\Jewelry.cs" />
+    <Compile Include="mp\JewelryGender.cs" />
+    <Compile Include="mp\JewelryJewelryStyle.cs" />
+    <Compile Include="mp\LandVehicles.cs" />
+    <Compile Include="mp\LargeAppliances.cs" />
+    <Compile Include="mp\LengthUnit.cs" />
+    <Compile Include="mp\LengthUnitOfMeasure.cs" />
+    <Compile Include="mp\MainImage.cs" />
+    <Compile Include="mp\Mart.cs" />
+    <Compile Include="mp\Mattresses.cs" />
+    <Compile Include="mp\Media.cs" />
+    <Compile Include="mp\MedicalAids.cs" />
+    <Compile Include="mp\MedicineAndSupplements.cs" />
+    <Compile Include="mp\Money.cs" />
+    <Compile Include="mp\Movies.cs" />
+    <Compile Include="mp\MoviesMpaaRating.cs" />
+    <Compile Include="mp\MPItem.cs" />
+    <Compile Include="mp\MPItemFeed.cs" />
+    <Compile Include="mp\MPItemFeedHeaderVersion.cs" />
+    <Compile Include="mp\MPItemShippingOverride.cs" />
+    <Compile Include="mp\MPItemUpdate.cs" />
+    <Compile Include="mp\MPItemUpdateProcessMode.cs" />
+    <Compile Include="mp\MPProduct.cs" />
+    <Compile Include="mp\MPProductCountryOfOriginAssembly.cs" />
+    <Compile Include="mp\MPProductCountryOfOriginComponents.cs" />
+    <Compile Include="mp\Music.cs" />
+    <Compile Include="mp\MusicalInstrument.cs" />
+    <Compile Include="mp\MusicalInstruments.cs" />
+    <Compile Include="mp\MusicCasesAndBags.cs" />
+    <Compile Include="mp\NumberOfPlayer.cs" />
+    <Compile Include="mp\nutrient.cs" />
+    <Compile Include="mp\OccasionAndSeasonal.cs" />
+    <Compile Include="mp\OfferEnvelope.cs" />
+    <Compile Include="mp\Office.cs" />
+    <Compile Include="mp\Optical.cs" />
+    <Compile Include="mp\Optics.cs" />
+    <Compile Include="mp\Other.cs" />
+    <Compile Include="mp\OtherGender.cs" />
+    <Compile Include="mp\Panties.cs" />
+    <Compile Include="mp\PantsAndShorts.cs" />
+    <Compile Include="mp\PantSize.cs" />
+    <Compile Include="mp\PercentageUnit.cs" />
+    <Compile Include="mp\PercentageUnitOfMeasure.cs" />
+    <Compile Include="mp\PersonalCare.cs" />
+    <Compile Include="mp\PhotoAccessories.cs" />
+    <Compile Include="mp\Photography.cs" />
+    <Compile Include="mp\PlumbingAndHVAC.cs" />
+    <Compile Include="mp\PlumbingAndHVACCeeTier.cs" />
+    <Compile Include="mp\PowerUnit.cs" />
+    <Compile Include="mp\PowerUnitOfMeasure.cs" />
+    <Compile Include="mp\PPUUnit.cs" />
+    <Compile Include="mp\PPUUnitOfMeasure.cs" />
+    <Compile Include="mp\PressureUnit.cs" />
+    <Compile Include="mp\PressureUnitOfMeasure.cs" />
+    <Compile Include="mp\PrintersScannersAndImaging.cs" />
+    <Compile Include="mp\PrintersScannersAndImagingMonochromeColor.cs" />
+    <Compile Include="mp\ProductEnvelope.cs" />
+    <Compile Include="mp\productIdentifier.cs" />
+    <Compile Include="mp\productIdentifierProductIdType.cs" />
+    <Compile Include="mp\Puzzles.cs" />
+    <Compile Include="mp\recycledMaterialContentValue.cs" />
+    <Compile Include="mp\ResolutionUnit.cs" />
+    <Compile Include="mp\ResolutionUnitOfMeasure.cs" />
+    <Compile Include="mp\Rings.cs" />
+    <Compile Include="mp\Seating.cs" />
+    <Compile Include="mp\ShipMethod.cs" />
+    <Compile Include="mp\ShipRegion.cs" />
+    <Compile Include="mp\ShirtsAndTops.cs" />
+    <Compile Include="mp\Shoes.cs" />
+    <Compile Include="mp\Skirts.cs" />
+    <Compile Include="mp\Socks.cs" />
+    <Compile Include="mp\Software.cs" />
+    <Compile Include="mp\SoundAndRecording.cs" />
+    <Compile Include="mp\SpeedUnit.cs" />
+    <Compile Include="mp\SpeedUnitOfMeasure.cs" />
+    <Compile Include="mp\SportAndRecreation.cs" />
+    <Compile Include="mp\SportAndRecreationGender.cs" />
+    <Compile Include="mp\Storage.cs" />
+    <Compile Include="mp\Strollers.cs" />
+    <Compile Include="mp\swatchImage.cs" />
+    <Compile Include="mp\TemperatureUnit.cs" />
+    <Compile Include="mp\TemperatureUnitOfMeasure.cs" />
+    <Compile Include="mp\TimeUnit.cs" />
+    <Compile Include="mp\TimeUnitOfMeasure.cs" />
+    <Compile Include="mp\Tires.cs" />
+    <Compile Include="mp\TiresTireTemperatureRating.cs" />
+    <Compile Include="mp\TiresTireTractionRating.cs" />
+    <Compile Include="mp\Tools.cs" />
+    <Compile Include="mp\ToolsAndHardware.cs" />
+    <Compile Include="mp\Toy.cs" />
+    <Compile Include="mp\ToyAgeRange.cs" />
+    <Compile Include="mp\ToyGender.cs" />
+    <Compile Include="mp\Toys.cs" />
+    <Compile Include="mp\trackListing.cs" />
+    <Compile Include="mp\TVFurniture.cs" />
+    <Compile Include="mp\TVsAndVideoDisplays.cs" />
+    <Compile Include="mp\TVShows.cs" />
+    <Compile Include="mp\UnitOfWeight.cs" />
+    <Compile Include="mp\Vehicle.cs" />
+    <Compile Include="mp\VehiclePartsAndAccessories.cs" />
+    <Compile Include="mp\VideoGames.cs" />
+    <Compile Include="mp\VideoGamesEsrbRating.cs" />
+    <Compile Include="mp\VideoProjectors.cs" />
+    <Compile Include="mp\VolumetricFlowRateUnit.cs" />
+    <Compile Include="mp\VolumetricFlowRateUnitOfMeasure.cs" />
+    <Compile Include="mp\VolumeUnit.cs" />
+    <Compile Include="mp\VolumeUnitOfMeasure.cs" />
+    <Compile Include="mp\Watches.cs" />
+    <Compile Include="mp\WatchesGender.cs" />
+    <Compile Include="mp\Watercraft.cs" />
+    <Compile Include="mp\Weapons.cs" />
+    <Compile Include="mp\WeightMeasure.cs" />
+    <Compile Include="mp\WeightUnit.cs" />
+    <Compile Include="mp\WeightUnitOfMeasure.cs" />
+    <Compile Include="mp\WheelsAndWheelComponents.cs" />
+    <Compile Include="mp\WomensSwimsuits.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
