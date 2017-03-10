@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Walmart.Entities.mp;
+using Walmart.Services;
 
 namespace WalmartUtils.ConsoleApp
 {
@@ -13,56 +14,84 @@ namespace WalmartUtils.ConsoleApp
         private static StreamWriter sw;
 
 
+        static readonly Type[] Types = {
+            typeof(MPProduct),
+           // typeof(Animal),
+            //typeof(ArtAndCraft),
+            //typeof(Baby),
+            //typeof(CarriersAndAccessories),
+            //typeof(Clothing),
+            //typeof(Electronics),
+            //typeof(FoodAndBeverage),
+            //typeof(Footwear),
+            //typeof(Furniture),
+            //typeof(GardenAndPatio),
+            //typeof(HealthAndBeauty),
+            //typeof(HealthAndBeauty),
+            //typeof(Home),
+            //typeof(Jewelry),
+            //typeof(Media),
+            //typeof(MusicalInstrument),
+            //typeof(OccasionAndSeasonal),
+            //typeof(OccasionAndSeasonal),
+            //typeof(Office),
+            //typeof(Other),
+            //typeof(Photography),
+            //typeof(SportAndRecreation),
+            //typeof(ToolsAndHardware),
+            //typeof(Toy),
+            //typeof(Vehicle),
+            //typeof(Watches)
+        };
+
+
         static void Main()
         {
-            if (File.Exists(path))
-                File.Delete(path);
 
-            sw = new StreamWriter(path);
+            PrintFullInfo();
 
-            ShowPropInfos(typeof(Animal));
-            ShowPropInfos(typeof(ArtAndCraft));
-            ShowPropInfos(typeof(Baby));
-            ShowPropInfos(typeof(CarriersAndAccessories));
-            ShowPropInfos(typeof(Clothing));
-            ShowPropInfos(typeof(Electronics));
-            ShowPropInfos(typeof(FoodAndBeverage));
-            ShowPropInfos(typeof(Footwear));
-            ShowPropInfos(typeof(Furniture));
-            ShowPropInfos(typeof(GardenAndPatio));
-            ShowPropInfos(typeof(HealthAndBeauty));
-            ShowPropInfos(typeof(HealthAndBeauty));
-            ShowPropInfos(typeof(Home));
-            ShowPropInfos(typeof(Jewelry));
-            ShowPropInfos(typeof(Media));
-            ShowPropInfos(typeof(MusicalInstrument));
-            ShowPropInfos(typeof(OccasionAndSeasonal));
-            ShowPropInfos(typeof(OccasionAndSeasonal));
-            ShowPropInfos(typeof(Office));
-            ShowPropInfos(typeof(Other));
-            ShowPropInfos(typeof(Photography));
-            ShowPropInfos(typeof(SportAndRecreation));
-            ShowPropInfos(typeof(ToolsAndHardware));
-            ShowPropInfos(typeof(Toy));
-            ShowPropInfos(typeof(Vehicle));
-            ShowPropInfos(typeof(Watches));
-
-            sw.Close();
-            sw.Dispose();
+           // PrintProperties();
 
             Console.ReadKey();
         }
 
+        private static void PrintFullInfo()
+        {
+            IXsdService service = new XsdService(@"..\..\..\Walmart.Core\xsds\mp");
+
+            foreach (var type in Types)
+            {
+                service.GetInfo(type.Name);
+            }
+        }
+
+        static bool _propertyNameOnly = false;
+
+        private static void PrintProperties(bool propertyNameOnly = false)
+        {
+            if (File.Exists(path))
+                File.Delete(path);
+
+            _propertyNameOnly = propertyNameOnly;
+
+            sw = new StreamWriter(path);
+
+            foreach (var type in Types)
+            {
+                ShowPropInfos(type);
+            }
+
+            sw.Close();
+            sw.Dispose();
+        }
+
         private static void ShowPropInfos(Type type)
         {
-
-
             foreach (var s in GetPropInfos(type))
             {
                 Console.WriteLine(s);
                 sw.WriteLine(s);
             }
-
         }
 
         public static IEnumerable<string> GetPropInfos(Type type)
@@ -71,7 +100,7 @@ namespace WalmartUtils.ConsoleApp
             {
                 if (IsSimple(prop.PropertyType))
                 {
-                    yield return $"{$"{type.Name}/{prop.Name}",-85}{prop.PropertyType.Name}";
+                    yield return _propertyNameOnly ? prop.Name : $"{$"{type.Name}/{prop.Name}",-85}{prop.PropertyType.Name}";
                 }
                 else if (prop.Name.ToLower() == "item")
                 {
@@ -83,18 +112,19 @@ namespace WalmartUtils.ConsoleApp
                         {
                             if (IsSimple(p.PropertyType))
                             {
-                                yield return $"{$"{type.Name}/{attr.Name}/{p.Name}",-85}{p.PropertyType.Name}";
+                                yield return _propertyNameOnly ? p.Name : $"{$"{type.Name}/{attr.Name}/{p.Name}",-85}{p.PropertyType.Name}";
                             }
                             else // complex
                             {
-                                yield return $"{$"{type.Name}/{attr.Name}/{p.Name}",-85}@complex";
+                                yield return _propertyNameOnly ? p.Name : $"{$"{type.Name}/{attr.Name}/{p.Name}",-85}@complex";
                             }
                         }
                     }
                 }
                 else // complex
                 {
-                    yield return $"{$"{type.Name}/{prop.Name}",-85}@complex";
+                    // yield return $"{$"{type.Name}/{prop.Name}",-85}@complex";
+                    yield return prop.Name;
                 }
             }
         }
