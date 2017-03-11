@@ -1,11 +1,17 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace Walmart.Services
 {
+    public interface IXsdService
+    {
+        IReadOnlyList<CategoryInfo> GetInfo(string xsdName);
+    }
+
     public class XsdService : IXsdService
     {
         private string _folderWithXsds;
@@ -15,28 +21,117 @@ namespace Walmart.Services
             _folderWithXsds = folderWithXsds;
         }
 
-        public object GetInfo(string xsdName)
+        public IReadOnlyList<CategoryInfo> GetInfo(string xsdName)
         {
             var fileName = $"{xsdName.Split('.').First()}.xsd";
 
-           var file = Path.Combine(_folderWithXsds, fileName);
+            var file = Path.Combine(_folderWithXsds, fileName);
 
             if (!File.Exists(file))
             {
                 throw new InvalidOperationException($"XSD does not exists in such folder.");
             }
 
-            using (var reader = new StringReader(File.ReadAllText(file)))
+            var xDoc = XDocument.Load(file);
+            var ns = XNamespace.Get(@"http://www.w3.org/2001/XMLSchema");
+            var nsW = XNamespace.Get(@"http://walmart.com/");
+
+            var schema = xDoc.Elements(ns + "schema");
+
+            var res = new List<CategoryInfo>();
+
+            var includes = schema.Elements(ns + "include");
+
+            var complexTypes = schema.Elements(ns + "complexType");
+
+            foreach (var complexType in complexTypes)
             {
-                var ser = new XmlSerializer(typeof(Schema));
-                var schema = ser.Deserialize(reader) as Schema;
-                return schema;
+                var attrs = complexType.Elements(ns + "sequence")
+                              .Elements(ns + "element");
+
+                var cat = new CategoryInfo
+                {
+                    CategoryName = $"{xsdName}|{complexType.Attribute("name").Value}"
+                };
+
+                var attrInfos = new List<AttributeInfo>();
+                foreach (var node in attrs)
+                {
+                    var attributeInfo = new AttributeInfo
+                    {
+                        Name = node.Attribute("name").Value,
+                        TypeName = node.Attribute("type")?.Value,
+                        IsComplexType = node.Attribute("type") != null
+                    };
+
+                    var annotation = node.Element(ns + "annotation");
+
+                    if (annotation != null)
+                    {
+                        var appinfoE = annotation.Element(ns + "appinfo");
+                        var rl = appinfoE?.Element(nsW + "requiredLevel");
+                        attributeInfo.Annotation = new Annotation
+                        {
+                            Appinfo = new Appinfo
+                            {
+                                RequiredLevel = rl?.Attribute("value")?.Value
+                            },
+                            Documentation = annotation.Element(ns + "documentation")?.Value
+                                .Replace(Environment.NewLine, "").Replace('\n', ' ')
+                        };
+                    }
+
+                    var simpleTypeE = node.Element(ns + "simpleType");
+
+                    if (simpleTypeE != null)
+                    {
+                        var restrictionE = simpleTypeE.Element(ns + "restriction");
+
+                        if (restrictionE != null)
+                        {
+                            var typeName = restrictionE.Attribute("base").Value.Replace("xsd:", "");
+                            attributeInfo.TypeName = typeName;
+                        }
+                    }
+
+                    attrInfos.Add(attributeInfo);
+                }
+                cat.Add(attrInfos);
+
+                res.Add(cat);
+            }
+
+            return res;
+        }
+    }
+
+    public class CategoryInfo
+    {
+        private readonly List<AttributeInfo> _attributeInfos;
+        public IReadOnlyList<AttributeInfo> AttributeInfos => _attributeInfos;
+        public string CategoryName { get; set; }
+
+        public CategoryInfo()
+        {
+            _attributeInfos = new List<AttributeInfo>();
+        }
+
+        public void Add(List<AttributeInfo> attrInfos)
+        {
+            foreach (var attributeInfo in attrInfos)
+            {
+                _attributeInfos.Add(attributeInfo);
             }
         }
     }
 
-    public interface IXsdService
+    public class AttributeInfo
     {
-        object GetInfo(string xsdName);
+        public string Name { get; set; }
+        public Annotation Annotation { get; set; }
+        public string TypeName { get; set; }
+        public bool IsComplexType { get; set; }
     }
+
+
 }

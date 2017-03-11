@@ -27,8 +27,7 @@ namespace Walmart.Services
     [XmlRoot(ElementName = "appinfo", Namespace = "http://www.w3.org/2001/XMLSchema")]
     public class Appinfo
     {
-        [XmlElement(ElementName = "requiredLevel", Namespace = "http://walmart.com/")]
-        public RequiredLevel RequiredLevel { get; set; }
+        public string RequiredLevel { get; set; }
 
         [XmlElement(ElementName = "conditionalAttributes", Namespace = "http://walmart.com/")]
         public ConditionalAttributes ConditionalAttributes { get; set; }

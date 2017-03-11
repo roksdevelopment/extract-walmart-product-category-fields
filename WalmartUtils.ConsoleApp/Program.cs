@@ -16,32 +16,32 @@ namespace WalmartUtils.ConsoleApp
 
         static readonly Type[] Types = {
             typeof(MPProduct),
-           // typeof(Animal),
-            //typeof(ArtAndCraft),
-            //typeof(Baby),
-            //typeof(CarriersAndAccessories),
-            //typeof(Clothing),
-            //typeof(Electronics),
-            //typeof(FoodAndBeverage),
-            //typeof(Footwear),
-            //typeof(Furniture),
-            //typeof(GardenAndPatio),
-            //typeof(HealthAndBeauty),
-            //typeof(HealthAndBeauty),
-            //typeof(Home),
-            //typeof(Jewelry),
-            //typeof(Media),
-            //typeof(MusicalInstrument),
-            //typeof(OccasionAndSeasonal),
-            //typeof(OccasionAndSeasonal),
-            //typeof(Office),
-            //typeof(Other),
-            //typeof(Photography),
-            //typeof(SportAndRecreation),
-            //typeof(ToolsAndHardware),
-            //typeof(Toy),
-            //typeof(Vehicle),
-            //typeof(Watches)
+            typeof(Animal),
+            typeof(ArtAndCraft),
+            typeof(Baby),
+            typeof(CarriersAndAccessories),
+            typeof(Clothing),
+            typeof(Electronics),
+            typeof(FoodAndBeverage),
+            typeof(Footwear),
+            typeof(Furniture),
+            typeof(GardenAndPatio),
+            typeof(HealthAndBeauty),
+            typeof(HealthAndBeauty),
+            typeof(Home),
+            typeof(Jewelry),
+            typeof(Media),
+            typeof(MusicalInstrument),
+            typeof(OccasionAndSeasonal),
+            typeof(OccasionAndSeasonal),
+            typeof(Office),
+            typeof(Other),
+            typeof(Photography),
+            typeof(SportAndRecreation),
+            typeof(ToolsAndHardware),
+            typeof(Toy),
+            typeof(Vehicle),
+            typeof(Watches)
         };
 
 
@@ -50,7 +50,7 @@ namespace WalmartUtils.ConsoleApp
 
             PrintFullInfo();
 
-           // PrintProperties();
+            // PrintProperties();
 
             Console.ReadKey();
         }
@@ -59,10 +59,30 @@ namespace WalmartUtils.ConsoleApp
         {
             IXsdService service = new XsdService(@"..\..\..\Walmart.Core\xsds\mp");
 
-            foreach (var type in Types)
+            const string f = "prop-full-infos.csv";
+
+            if (File.Exists(f))
+                File.Delete(f);
+            sw = new StreamWriter(f);
+
+            foreach (var type in Types.Take(100))
             {
-                service.GetInfo(type.Name);
+                var info = service.GetInfo(type.Name);
+
+                foreach (var categoryInfo in info)
+                {
+                    foreach (var a in categoryInfo.AttributeInfos)
+                    {
+                        sw.WriteLine($"MPProduct|{categoryInfo.CategoryName}|{a.Name}|{(a.IsComplexType ? "complexType" : "simpleType")}|{a.TypeName}|{a.Annotation.Documentation}");
+                        Console.WriteLine($"{a.Name}: {a.Annotation?.Documentation}");
+                    }
+                }
             }
+
+            sw.Close();
+            sw.Dispose();
+
+            Console.WriteLine("Full info getting done!");
         }
 
         static bool _propertyNameOnly = false;
