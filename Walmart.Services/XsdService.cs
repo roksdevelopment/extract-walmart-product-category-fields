@@ -14,7 +14,7 @@ namespace Walmart.Services
 
     public class XsdService : IXsdService
     {
-        private string _folderWithXsds;
+        private readonly string _folderWithXsds;
 
         public XsdService(string folderWithXsds)
         {
@@ -34,20 +34,19 @@ namespace Walmart.Services
 
             var xDoc = XDocument.Load(file);
             var ns = XNamespace.Get(@"http://www.w3.org/2001/XMLSchema");
-            var nsW = XNamespace.Get(@"http://walmart.com/");
+            var nsW = XNamespace.Get(@"http://walmart.com/content");
 
             var schema = xDoc.Elements(ns + "schema");
-
-            var res = new List<CategoryInfo>();
-
             var includes = schema.Elements(ns + "include");
-
             var complexTypes = schema.Elements(ns + "complexType");
 
+            var res = new List<CategoryInfo>();
             foreach (var complexType in complexTypes)
             {
-                var attrs = complexType.Elements(ns + "sequence")
-                              .Elements(ns + "element");
+                var attrs = complexType.Elements(ns + "all")
+                    //.Elements(ns + "sequence")
+                    //.Elements(ns + "element")
+                    ;
 
                 var cat = new CategoryInfo
                 {
@@ -55,11 +54,11 @@ namespace Walmart.Services
                 };
 
                 var attrInfos = new List<AttributeInfo>();
-                foreach (var node in attrs)
+                foreach (var node in attrs.Elements(ns + "element"))
                 {
                     var attributeInfo = new AttributeInfo
                     {
-                        Name = node.Attribute("name").Value,
+                        Name = node.Attribute("name")?.Value,
                         TypeName = node.Attribute("type")?.Value,
                         IsComplexType = node.Attribute("type") != null
                     };
@@ -83,15 +82,12 @@ namespace Walmart.Services
 
                     var simpleTypeE = node.Element(ns + "simpleType");
 
-                    if (simpleTypeE != null)
-                    {
-                        var restrictionE = simpleTypeE.Element(ns + "restriction");
+                    var restrictionE = simpleTypeE?.Element(ns + "restriction");
 
-                        if (restrictionE != null)
-                        {
-                            var typeName = restrictionE.Attribute("base").Value.Replace("xsd:", "");
-                            attributeInfo.TypeName = typeName;
-                        }
+                    if (restrictionE != null)
+                    {
+                        var typeName = restrictionE.Attribute("base").Value.Replace("xsd:", "");
+                        attributeInfo.TypeName = typeName;
                     }
 
                     attrInfos.Add(attributeInfo);

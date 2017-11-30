@@ -264,6 +264,36 @@
     <Compile Include="mp\WheelsAndWheelComponents.cs" />
     <Compile Include="mp\WomensSwimsuits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="v3\Animal.cs" />
+    <Compile Include="v3\ArtAndCraftCategory.cs" />
+    <Compile Include="v3\Baby.cs" />
+    <Compile Include="v3\CarriersAndAccessoriesCategory.cs" />
+    <Compile Include="v3\category.cs" />
+    <Compile Include="v3\Clothing.cs" />
+    <Compile Include="v3\ClothingCategory.cs" />
+    <Compile Include="v3\common.cs" />
+    <Compile Include="v3\ContentProduct.cs" />
+    <Compile Include="v3\ContentProductFeed.cs" />
+    <Compile Include="v3\ContentProductFeedHeader.cs" />
+    <Compile Include="v3\Electronics.cs" />
+    <Compile Include="v3\FoodAndBeverageCategory.cs" />
+    <Compile Include="v3\FootwearCategory.cs" />
+    <Compile Include="v3\FurnitureCategory.cs" />
+    <Compile Include="v3\GardenAndPatioCategory.cs" />
+    <Compile Include="v3\HealthAndBeauty.cs" />
+    <Compile Include="v3\Home.cs" />
+    <Compile Include="v3\JewelryCategory.cs" />
+    <Compile Include="v3\Media.cs" />
+    <Compile Include="v3\MusicalInstrument.cs" />
+    <Compile Include="v3\OccasionAndSeasonal.cs" />
+    <Compile Include="v3\OfficeCategory.cs" />
+    <Compile Include="v3\OtherCategory.cs" />
+    <Compile Include="v3\Photography.cs" />
+    <Compile Include="v3\SportAndRecreation.cs" />
+    <Compile Include="v3\ToolsAndHardware.cs" />
+    <Compile Include="v3\ToysCategory.cs" />
+    <Compile Include="v3\Vehicle.cs" />
+    <Compile Include="v3\WatchesCategory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
